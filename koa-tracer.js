@@ -32,7 +32,7 @@ export const trace = (ctx, key, message) => {
 }
 
 export const traceError = (ctx, err) => {
-  const error = { time: new Date(), ...toMessage(err) }
+  const error = { time: new Date(), ...toMessage(err), original: err }
 
   ctx.state.errors = [ ...ctx.state.errors || [], error ]
   ctx.state.errorsCount = ctx.state.errors.length
