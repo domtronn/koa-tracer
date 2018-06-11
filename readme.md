@@ -145,7 +145,7 @@ The following events are fired on `trace` and `error` logging
 completion.
 
 * `koa-tracer:trace => ({ ctx, key, trace })`
-* `koa-tracer:error => ({ ctx, error })`
+* `koa-tracer:error => ({ ctx, error, original })`
 
 _**N.B.** These events are called with **Objects**_
 
