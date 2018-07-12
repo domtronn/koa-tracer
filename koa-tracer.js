@@ -32,7 +32,7 @@ export const trace = (ctx, key, message) => {
 }
 
 export const traceError = (ctx, err) => {
-  const error = { time: new Date(), ...toMessage(err) }
+  const error = { time: new Date(), ...toMessage(err), stack: err.stack }
 
   ctx.state.errors = [ ...ctx.state.errors || [], error ]
   ctx.state.errorsCount = ctx.state.errors.length
@@ -45,6 +45,7 @@ export default () => async (ctx, next) => {
   ctx.state = { ...ctx.state, errors: [], errorsCount: 0 }
 
   ctx.trace = trace.bind({}, ctx)
+  ctx.traceError = traceError.bind({}, ctx)
   ctx.error = traceError.bind({}, ctx)
 
   await next()
